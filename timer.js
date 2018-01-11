@@ -53,7 +53,6 @@ function handleStartButtonClick() {
     if (!document.getElementById("splitButton"))
         addSplitButton();
     setInterval(getClockTime, 170);
-    setupEmailButton();
     $("#splitButton").focus();
 }
 
@@ -65,7 +64,7 @@ function handleSplitButtonClick() {
     
     var currentSplit = document.createElement("li");
     currentSplit.innerHTML = clickTime;
-    currentSplit.className = "splitTime";
+    currentSplit.className = "splitTime list-group-item";
     $("#playTime").prepend(currentSplit);
     $("#splitButton").focus();
 }
