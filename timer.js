@@ -20,7 +20,7 @@ function addStartButton() {
     controlButtons.appendChild(button);
     var startButton = document.getElementById("startButton");
     startButton.onclick = handleStartButtonClick;
-    document.getElementById("startButton").focus();
+    $("#startButton").focus();
 }
 
 function addSplitButton() {
@@ -31,8 +31,7 @@ function addSplitButton() {
     button.value = "split";
     button.className = "btn btn-lg btn-primary btn-block";
     controlButtons.appendChild(button);
-    var splitButton = document.getElementById("splitButton");
-    splitButton.onclick = handleSplitButtonClick;
+    $("#splitButton").click(handleSplitButtonClick);
 }
 
 function sendEmail(){
@@ -55,29 +54,20 @@ function handleStartButtonClick() {
         addSplitButton();
     setInterval(getClockTime, 170);
     setupEmailButton();
-    document.getElementById("splitButton").focus();
-}
-
-function setupEmailButton() {
-    var emailButton = document.getElementById("control");
-    //emailButton.onclick = sendEmail;
+    $("#splitButton").focus();
 }
 
 function handleSplitButtonClick() {
     var splitTime = new Date();
     var clickTime = time(splitTime - startTime);
     
-    var splitTimeDiv = document.getElementById("splitTimeDiv");
-    splitTimeDiv.innerHTML = clickTime;
+    $("#splitTimeDiv").html(clickTime);
     
-    var playTime = document.getElementById("playTime");
     var currentSplit = document.createElement("li");
-    var previousSplit = document.getElementById("splitTime");
     currentSplit.innerHTML = clickTime;
-    currentSplit.id = "splitTime";
-    //playTime.appendChild(currentSplit);
-    playTime.insertBefore(currentSplit, previousSplit);
-    document.getElementById("splitButton").focus();
+    currentSplit.className = "splitTime";
+    $("#playTime").prepend(currentSplit);
+    $("#splitButton").focus();
 }
 
 function time(date) {
@@ -135,8 +125,7 @@ function getClockTime() {
     
     var currentClockTime = time(currentTime).slice(0, -2);
 
-    var clockTimeDiv = document.getElementById("clockTimeDiv");
-    clockTimeDiv.innerHTML = currentClockTime + "&nbsp&nbsp";
+    $("#clockTimeDiv").html(currentClockTime + "&nbsp&nbsp");
 }
 
 function prependZero(number) {

@@ -1,2 +1,2 @@
 # RaceTimer
-Race timer / stopwatch web app utilizing BootStrap 4 and jQuery
+Race timer / stopwatch web app utilizing Bootstrap 4 and jQuery

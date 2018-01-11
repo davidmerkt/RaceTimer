@@ -10,19 +10,16 @@
   <style>
     #clock {
       margin-top: 3.5rem;
-      background-color: lightgrey;
     }
 
     #splits {
       padding-top: 8.25rem;
-    }
-
-    #splits {
-      padding-bottom: 2rem;
+      padding-bottom: 2.5rem;
     }
 
     #controls {
-        background-color: black;
+      padding-bottom: .25rem;
+      padding-top: .25rem;
     }
   </style>
 </head>
@@ -37,23 +34,21 @@
   </nav>
 </header>
 <main>
-  <section id="clock" class="fixed-top">
-    <table>
-      <tr>
-        <td>Start Time</td>
-        <td id="startTimeDiv" class="mono">0:00:00.000</td>
-      </tr>
-      <tr>
-        <td>Clock Time</td>
-        <td id="clockTimeDiv" class="mono">0:00:00.000</td>
-      </tr>
-      <tr>
-        <td>Split Time</td>
-        <td id="splitTimeDiv" class="mono"></td>
-      </tr>
-    </table>
+  <section id="clock" class="fixed-top bg-primary text-light font-weight-bold container-fluid">
+    <div class="row">
+      <div class="col-6 col-sm-3 col-md-2 col-xl-1">Start Time</div>
+      <div class="col" id="startTimeDiv">0:00:00.000</div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-sm-3 col-md-2 col-xl-1">Clock Time</div>
+      <div class="col" id="clockTimeDiv">0:00:00.000</div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-sm-3 col-md-2 col-xl-1">Split Time</div>
+      <div class="col" id="splitTimeDiv"></div>
+    </div>
   </section>
-  <section id="controls" class="fixed-bottom">
+  <section id="controls" class="fixed-bottom container-fluid bg-dark">
     <form id="controlButtons">
       <div class="row">
         <div class="col-6" id="col1"></div>
