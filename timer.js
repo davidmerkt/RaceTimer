@@ -1,15 +1,21 @@
 window.onload = function() {
-    //var startButtonDiv = document.getElementById("startButtonDiv");
-    //var splitButton = document.getElementById("splitButton");
-    //startButton.onclick = handleStartButtonClick;
-    //splitButton.onclick = handleSplitButtonClick;
     addStartButton();
 }
 
-var startTime;
+
+var timerEvent = {
+    "startDate": null,
+    "endDate": null,
+    "description": "",
+    "location": {
+      "latitude": "41.82284533029305",
+      "longitude": "-72.44302471066285"
+    }
+};
+
+var split = [];
 
 function addStartButton() {
-    //alert('test');
     var controlButtons = document.getElementById("col1");
     
     var button = document.createElement("input");
@@ -46,9 +52,9 @@ function sendEmail(){
 }
 
 function handleStartButtonClick() {
-    startTime = new Date();
+    timerEvent.startDate = new Date();
     var startTimeDiv = document.getElementById("startTimeDiv");
-    startTimeDiv.innerHTML = prependZero(startTime.getHours()) + ":" + prependZero(startTime.getMinutes()) + ":" + prependZero(startTime.getSeconds()) + "." + time(startTime.getMilliseconds()).slice(-3);
+    startTimeDiv.innerHTML = prependZero(timerEvent.startDate.getHours()) + ":" + prependZero(timerEvent.startDate.getMinutes()) + ":" + prependZero(timerEvent.startDate.getSeconds()) + "." + time(timerEvent.startDate.getMilliseconds()).slice(-3);
     document.getElementById("startButton").disabled = true;
     if (!document.getElementById("splitButton"))
         addSplitButton();
@@ -57,14 +63,25 @@ function handleStartButtonClick() {
 }
 
 function handleSplitButtonClick() {
-    var splitTime = new Date();
-    var clickTime = time(splitTime - startTime);
+    var thisSplit = new Object();
+    thisSplit.splitDate = new Date();
+    thisSplit.splitTime = time(thisSplit.splitDate - timerEvent.startDate);
     
-    $("#splitTimeDiv").html(clickTime);
+    split.push(thisSplit);
+
+    $("#splitTimeDiv").html(thisSplit.splitTime);
     
-    var currentSplit = document.createElement("li");
-    currentSplit.innerHTML = clickTime;
-    currentSplit.className = "splitTime list-group-item";
+    var currentSplitPlace = document.createElement("td");
+    currentSplitPlace.innerHTML = split.length;
+
+    var currentSplitTime = document.createElement("td");
+    currentSplitTime.innerHTML = thisSplit.splitTime;
+    currentSplitTime.className = "splitTime";
+
+    var currentSplit = document.createElement("tr");
+    currentSplit.appendChild(currentSplitPlace);
+    currentSplit.appendChild(currentSplitTime);
+
     $("#playTime").prepend(currentSplit);
     $("#splitButton").focus();
 }
@@ -100,7 +117,7 @@ function time(date) {
 
 function getClockTime_original() {
     var currentTime = new Date();
-    currentTime -= startTime;
+    currentTime -= timerEvent.startDate;
     //return time(currentTime);
     
     var currentClockTime = "";
@@ -120,7 +137,7 @@ function getClockTime_original() {
 }
 
 function getClockTime() {
-    var currentTime = new Date() - startTime;
+    var currentTime = new Date() - timerEvent.startDate;
     
     var currentClockTime = time(currentTime).slice(0, -2);
 
